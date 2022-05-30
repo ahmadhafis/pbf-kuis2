@@ -49,7 +49,7 @@ class BookTable extends Component {
                 <td class="border border-slate-700">{this.state.book.deskripsi}</td>
                 <td class="border border-slate-700">{this.state.book.stok}</td>
                 <td class="border border-slate-700">
-                    <Link to={`/editbook/${this.state.key}`} class="btn btn-info px-8">Edit</Link>
+                    <Link to={`/booklist/editbook/${this.state.key}`} class="btn btn-info px-8">Edit</Link>
                     <button className="btn btn-error px-8" onClick={this.delete.bind(this, this.state.key)} >Delete</button>
                 </td>
             </tr>

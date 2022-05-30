@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Booktable from "./BookTable";
 //import Alert from "./components/Alert";
 import fire from "../../Config/Config";
 
@@ -39,6 +38,15 @@ class BookList extends Component {
     this.unsubscribe= this.ref.onSnapshot(this.onCollectionUpdate);
   }
 
+  delete(id) {
+    fire.firestore().collection('books').doc(id).delete().then(() => {
+        console.log("Dokumen berhasil di-hapus");
+        this.props.history.push("/booklist")
+    }).catch((error) => {
+        console.error("data di-hapus mengalami error: ", error);
+    });
+}
+
 
   render() {
     return (
@@ -51,7 +59,7 @@ class BookList extends Component {
         <div className="h-screen card-body">
         {/* <Alert data={this.state.Notif}/> */}
           <div class="overflow-x-auto">
-          <a href="/createbook" type="submit" class="btn btn-primary">Create</a>
+          <a href="createbook" type="submit" class="btn btn-primary">Create</a>
             <table class="table-auto border-collapse w-full bg-gray-400">
               <thead>
                 <tr>
@@ -66,7 +74,18 @@ class BookList extends Component {
               </thead>
               <tbody>
                 {this.state.books.map((book) => 
-                  <Booktable/>
+                   <tr className='hover'>
+                   <td class="border border-slate-700">{book.kodebuku}</td>
+                   <td class="border border-slate-700">{book.judul}</td>
+                   <td class="border border-slate-700">{book.author}</td>
+                   <td class="border border-slate-700">{book.penerbit}</td>
+                   <td class="border border-slate-700">{book.deskripsi}</td>
+                   <td class="border border-slate-700">{book.stok}</td>
+                   <td class="border border-slate-700">
+                       <Link to={`editbook/${this.state.key}`} class="btn btn-info px-8">Edit</Link>
+                       <button className="btn btn-error px-8" onClick={this.delete.bind(this, this.state.key)} >Delete</button>
+                   </td>
+               </tr>
                 )}
               </tbody>
             </table>
