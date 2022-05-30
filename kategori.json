@@ -1,0 +1,14 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "kodekategori": "001",
+      "kategori": "Action"
+    },
+    {
+      "id": 2,
+      "kodekategori": "002",
+      "kategori": "Fiksi"
+    }
+  ]
+}

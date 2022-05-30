@@ -1,0 +1,13 @@
+{
+  "peminjaman": [
+    {
+      "id": 1,
+      "kodePeminjam": "1",
+      "nama": "Ervin Pratama",
+      "alamat": "Singosari",
+      "hp": "0819276355128",
+      "email": "vin@mail.com",
+      "buku": "Off The Record"
+    }
+  ]
+}

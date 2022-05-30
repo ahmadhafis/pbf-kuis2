@@ -1,0 +1,13 @@
+{
+  "denda": [
+    {
+      "id": 1,
+      "kodeDenda": "1",
+      "nama": "Ervin Pratama",
+      "tglPinjam": "17 Maret 2022",
+      "tglKembali": "29 Maret 2022",
+      "telat": "5 Hari",
+      "bayarDenda": 25000
+    }
+  ]
+}

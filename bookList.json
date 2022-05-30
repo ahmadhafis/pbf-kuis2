@@ -1,0 +1,22 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "kodebuku": "001",
+      "judul": "Off The Record",
+      "author": "Simon F.",
+      "penerbit": "PT. Graficofico",
+      "deskripsi": "Buku Tahun 2020",
+      "stok": "4"
+    },
+    {
+      "id": 2,
+      "kodebuku": "002",
+      "judul": "Slain",
+      "author": "Marcus M.",
+      "penerbit": "English DBook",
+      "deskripsi": "Buku Tahun 2020",
+      "stok": "5"
+    }
+  ]
+}

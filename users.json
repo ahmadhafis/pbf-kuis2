@@ -1,0 +1,21 @@
+{
+  "posts": [
+    {},
+    {
+      "id": 1649584336920,
+      "nama": "Riza Amalia",
+      "email": "rizaamaliah01@gmail.com",
+      "password": "123"
+    },
+    {
+      "id": 1649588644071,
+      "nama": "test",
+      "email": "test@mail.com",
+      "password": "123"
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
