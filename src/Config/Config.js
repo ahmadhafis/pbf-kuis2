@@ -2,6 +2,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import "firebase/firestore";
+import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
 
 const settings = {timestampsInSnapshots: true};
 
@@ -16,5 +18,9 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings(settings);
+
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
+export {db}
 
 export default firebase;
