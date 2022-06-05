@@ -12,7 +12,6 @@ import Denda from "./denda/Denda";
 import Login from "./auth/Login";
 import { ProfileUser } from "./user/ProfileUser";
 import CreateBookList from "./booklist/CreateBookList";
-import EditBookList from "./booklist/EditBookList";
 
 const Home = ({handleLogout}) => {
   return (

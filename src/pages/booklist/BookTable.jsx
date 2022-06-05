@@ -1,60 +1,68 @@
-import { doc } from 'firebase/firestore';
-import React, { Component } from 'react';
-import fire from '../../Config/Config';
-import { Link } from 'react-router-dom';
- 
-class BookTable extends Component {
+import React, { useEffect, useState } from "react";
+import BookDataService from "./book.services";
 
-    constructor(props){
-        super(props);
-        this.state = {
-            book: {},
-            key: ''
-        };
-    }
 
-    componentDidMount() {
-        const ref = fire.firestore().collection('books').doc(this.props.match.params.id);
-        ref.get().then((doc) => {
-            if (doc.exists) {
-                this.setState({
-                    book: doc.data(),
-                    key: doc.id,
-                    isLoading: false
-                });
-            } else {
-                console.log("Tidak ada dokumen!");
-            }
-        });
-    }
+const BookTable = ({ getBookId }) => {
+  const [books, setBooks] = useState([]);
+  useEffect(() => {
+    getBooks();
+  }, []);
 
-    delete(id) {
-        fire.firestore().collection('books').doc(id).delete().then(() => {
-            console.log("Dokumen berhasil di-hapus");
-            this.props.history.push("/booklist")
-        }).catch((error) => {
-            console.error("data di-hapus mengalami error: ", error);
-        });
-    }
-    
- 
-    render() {
-        
-        return (
-            <tr className='hover'>
-                <td class="border border-slate-700">{this.state.book.kodebuku}</td>
-                <td class="border border-slate-700">{this.state.book.judul}</td>
-                <td class="border border-slate-700">{this.state.book.author}</td>
-                <td class="border border-slate-700">{this.state.book.penerbit}</td>
-                <td class="border border-slate-700">{this.state.book.deskripsi}</td>
-                <td class="border border-slate-700">{this.state.book.stok}</td>
-                <td class="border border-slate-700">
-                    <Link to={`/booklist/editbook/${this.state.key}`} class="btn btn-info px-8">Edit</Link>
-                    <button className="btn btn-error px-8" onClick={this.delete.bind(this, this.state.key)} >Delete</button>
-                </td>
-            </tr>
-        );
-    }
+
+  const getBooks = async () => {
+    const data = await BookDataService.getAllBooks();
+    console.log(data.docs);
+    setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  const deleteHandler = async (id) => {
+    await BookDataService.deleteBook(id);
+    getBooks();
+  };
+
+    return (
+
+        <div className="h-screen card-body">
+            <button class="btn btn-primary" onClick={getBooks}>
+          Refresh List
+        </button>
+        {/* <Alert data={this.state.Notif}/> */}
+          <div class="overflow-x-auto">
+            <table class="table-auto border-collapse w-full bg-gray-400">
+              <thead>
+                <tr>
+                  <th class="border border-slate-700">#Code</th>
+                  <th class="border border-slate-700">Judul</th>
+                  <th class="border border-slate-700">Author</th>
+                  <th class="border border-slate-700">Penerbit</th>
+                  <th class="border border-slate-700">Deskripsi</th>
+                  <th class="border border-slate-700">Stok</th>
+                  <th class="border border-slate-700"> Options</th>
+                </tr>
+              </thead>
+              <tbody>
+                {books.map((doc) => {
+                    return(
+                  <tr className='hover' key={doc.id}>
+                  <td class="border border-slate-700">{doc.kodebuku}</td>
+                  <td class="border border-slate-700">{doc.judul}</td>
+                  <td class="border border-slate-700">{doc.author}</td>
+                  <td class="border border-slate-700">{doc.penerbit}</td>
+                  <td class="border border-slate-700">{doc.deskripsi}</td>
+                  <td class="border border-slate-700">{doc.stok}</td>
+                  <td class="border border-slate-700">
+                      <button class="btn btn-info px-8" onClick={(e) => getBookId(doc.id)}>Edit</button>
+                      <button className="btn btn-error px-8" onClick={(e) => deleteHandler(doc.id)} >Delete</button>
+                  </td>
+              </tr>
+                    )
+                }) 
+              }
+              </tbody>
+            </table>
+          </div>
+        </div>
+    );
 }
- 
+
 export default BookTable;
