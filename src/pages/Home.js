@@ -38,9 +38,6 @@ const Home = ({handleLogout}) => {
           <Route path="/createbook">
             <CreateBookList />
           </Route>
-          <Route path="/editbook/:id">
-            <EditBookList />
-          </Route>
           <Route path="/kategori">
           <Kategori/>
           </Route>
